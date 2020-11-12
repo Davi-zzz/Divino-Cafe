@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+		
+<h:head>
+	<title>Computer Store back-end view</title>
+	<link rel="StyleSheet" type="text/css" href="resources/css/Style.css"
+		media="screen"></link>
+</h:head>
+<body jsf:id="component">
+<form jsf:id="component2">
+
+	<h:messages style="color:red"/>
+		<div>
+			<fieldset style="border-radius: 5px">
+				
+				<LEGEND>dIVINO cAFÉr</LEGEND>
+				<table jsf:id="nome">
+					
+					<tr>
+						<td>Nome: </td>
+						<td>
+							<h:inputText id="itNome" value="#{userController.entity.nome}"
+								styleClass="caixasTexto" p:placeholder="digite aqui..."
+								required="true"
+								requiredMessage="O nome deve ser informado." 
+								validatorMessage="Informe um valor entre 2 e 60" >
+							<f:validateLength minimum="2" maximum="60" />
+							<h:message for="itNome" style="color:red"/>
+							</h:inputText>
+								
+						</td>
+					</tr>
+					<tr>
+						<td>CPF: </td>
+						<td>
+						<h:inputText id="itCpf" styleClass="caixasTexto" value="#{userController.entity.cpf}"
+						validatorMessage="Cpf inválido. Ex. 999.999.999-99" p:placeholder="digite aqui...">
+						<f:validateRegex 
+							pattern="(^[0-9]{3}\.{1}[0-9]{3}\.{1}[0-9]{3}\-{1}[0-9]{2})|([0-9]{11})"/>
+						</h:inputText>
+						<h:message for="itCpf" style="color:red"/>
+								
+						</td>
+					</tr>
+					<tr>
+						<td>Data de Nascimento: </td>
+						<td>
+						<h:inputText id="itData" styleClass="caixasTexto" p:placeholder="digite aqui..." value="#{userController.entity.dataNascimento}" 
+							converterMessage="Erro ao converter a data">
+							<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+						</h:inputText>
+						<h:message for="itData" style="color:red"/>
+						</td>
+					</tr>
+					
+					<tr>
+					<td>Email: </td>
+						<td>
+							<h:inputText id="itEmail" 
+							 value="#{userController.entity.email}" 
+							 validatorMessage="Email inválido." styleClass="caixasTexto" p:placeholder="digite aqui...">
+								<f:validateRegex 
+									pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"/>
+							</h:inputText>	
+							<h:message for="itEmail" style="color:red"/>			
+						</td>
+					</tr>
+					<tr>
+						<td>Cidade: </td>
+						<td><h:inputText id="itCity" styleClass="caixasTexto" p:placeholder="digite aqui..." value="#{userController.entity.cidade}" />	
+							<h:message for="itCity" style="color:red"/>
+						</td>
+					
+					</tr>
+					<tr>
+						<td>Senha: </td>
+						<td><h:inputSecret id="isSenha" styleClass="caixasTexto" p:placeholder="digite aqui..." value="#{userController.entity.senha}" />	
+							<h:message for="isSenha" style="color:red"/>
+						</td>
+					
+					</tr>
+					<tr>
+					
+					<td>Sexo: </td>
+						<td>
+							<h:selectOneMenu styleClass="select" value="#{userController.entity.sexo}">
+								<f:selectItem itemLabel="Selecione ..." />
+								<f:selectItems value="#{userController.listaSexo}" 
+											   var="obj"
+											   itemLabel="#{obj.label}"/>
+							</h:selectOneMenu>
+						</td>
+					
+					</tr>
+				</table>
+				
+				<table>
+					
+					<tr>
+						<td>
+							<h:commandButton value="Incluir"
+								actionListener="#{userController.incluir()}" 
+								disabled="#{userController.entity.id != null}">
+								<f:ajax execute="@form" render="@form formDataTable"/>
+							</h:commandButton>	
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							<button jsf:action="#{userController.alterar()}" class="botoes">Alterar</button>
+						</td>
+						
+					</tr>
+						<tr>
+							
+							<td>
+								<button jsf:action="#{userController.limpar}" class="botoes">Limpar</button>
+							</td>
+						</tr>
+
+				</table>
+
+			</fieldset>
+		</div>
+	</form>
+	<div>
+		<LEGEND>dIVINO cAFÉ</LEGEND>
+		<fieldset style="border-radius: 5px">
+	<h:form id="formDataTable">		
+		<h:dataTable style="" value="#{userController.listaEntity}" var="obj">
+			<h:column>
+				<f:facet name="header">Id</f:facet>		
+				<h:outputLabel value="#{obj.id}"/>	
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">| Nome |</f:facet>	
+				<h:commandLink value="#{obj.nome}" 
+						actionListener="#{userController.editar(obj)}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">| Data Nascimento |</f:facet>		
+				<h:outputLabel value="#{obj.dataNascimento}">
+					<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+				</h:outputLabel>	
+			</h:column>	
+			
+			
+			<h:column>
+				<f:facet name="header">| E-mail |</f:facet>		
+				<h:outputLabel value="#{obj.email}"/>	
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">| Senha |</f:facet>		
+				<h:outputLabel value="#{obj.senha}"/>	
+			</h:column>		
+			<h:column>
+				<f:facet name="header">| Cidade |</f:facet>		
+				<h:outputLabel value="#{obj.cidade}"/>	
+			</h:column>		
+			
+			<h:column>
+				<f:facet name="header">| Sexo |</f:facet>		
+				<h:outputLabel value="#{obj.sexo.label}"/>	
+			</h:column>		
+			<h:column>
+				<f:facet name="header">Ação</f:facet>		
+				<h:commandLink value="Apagar" actionListener="#{userController.excluir(obj)}"/>	
+			</h:column>								
+		
+		</h:dataTable>
+	</h:form>	
+	</fieldset>
+</div>
+					
+					
+	
+</body>
+
+</html>

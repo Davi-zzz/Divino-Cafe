@@ -1,0 +1,81 @@
+*{
+	background-color: #02733E;
+	
+}
+td {
+	font-weight: bold;
+	font-family: arial;
+	display: marker;
+	font-size: 100%;
+	margin-left: 4%;
+	color: #ffffff;
+}
+
+.email {
+	font-weight: bold;
+	font-family: arial;
+	display: inline;
+	font-size: 100%;
+	margin-left: 4%;
+	color: #ffffff;
+}
+
+.mensagem {
+	font-weight: bold;
+	font-family: arial;
+	margin-left: 0%;
+	display: block;
+	font-size: 100%;
+	margin-left: 4%;
+	margin-top: 5%;
+	color: #ffffff;
+	
+}
+
+.caixasTexto {
+	border-bottom-style: groove;
+	font-family: arial;
+	background: rgba(255,255,255, 0.4);
+	
+}
+
+.caixaTextoMsg {
+	margin-top: 1%;
+	display: block;
+	border-bottom-style: groove;
+	font-family: arial;
+	margin-left: 4%;
+	width: 90%;
+	height: 60px;
+	background: rgba(255,255,255, 0.4);
+}
+
+.statusSistema {
+	margin-left: 70%;
+	color: white;
+}
+
+div {
+	width: 30%;
+	display: table;
+	margin-left: 35%;
+	margin-top: 15%;
+}
+
+LEGEND {
+	font-family: arial;
+	font-weight: bold;
+	text-align: center;
+	color: #ffffff;
+}
+
+.botoes {
+	
+	font-family: arial;
+	font-weight: bold;
+	font-size: 100%;
+	background-color: #0D0D0D;
+	color: rgba(255,255,255, 0.7);
+
+	
+}
